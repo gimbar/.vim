@@ -1,3 +1,6 @@
+" set another shell (syntastic doesn't like fish)
+set shell=bash
+
 " disable beeping
 set noerrorbells
 set visualbell
@@ -112,3 +115,6 @@ nnoremap <f1> :NERDTreeToggle<cr>
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 
+" syntastic
+map <silent> <Leader>e :Errors<CR>
+map <Leader>s :SyntasticToggleMode<CR>
