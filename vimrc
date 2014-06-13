@@ -98,34 +98,6 @@ let g:solarized_termcolors=256
 set background=dark
 colorscheme solarized
 
-" neobundle
-if has('vim_starting')
-  set nocompatible               " Be iMproved
-
-  " Required:
-  set runtimepath+=/home/felix/.vim/bundle/neobundle.vim/
-endif
-
-" Required:
-call neobundle#begin(expand('/home/felix/.vim/bundle'))
-
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'flazz/vim-colorschemes'
-
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-
-" Required:
-call neobundle#end()
-
 " airline
 set ls=2
 set laststatus=2
@@ -139,3 +111,4 @@ nnoremap <f1> :NERDTreeToggle<cr>
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
+
