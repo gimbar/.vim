@@ -3,7 +3,6 @@
 " Based on idris indentation
 "
 " author: raichoo (raichoo@googlemail.com)
-" date: Jun 18 2014
 "
 " Modify g:haskell_indent_if and g:haskell_indent_case to
 " change indentation for `if'(default 3) and `case'(default 5).
@@ -25,7 +24,7 @@ endif
 
 if !exists('g:haskell_indent_case')
   " case xs of
-  " >>>>>[]      -> ...
+  " >>>>>[]     -> ...
   " >>>>>(y:ys) -> ...
   let g:haskell_indent_case = 5
 endif
@@ -49,7 +48,7 @@ if !exists('g:haskell_indent_do')
 endif
 
 setlocal indentexpr=GethaskellIndent()
-setlocal indentkeys=!^F,o,O,},=where,=in
+setlocal indentkeys=!^F,o,O,},0=where,0=in,0=let,<CR>
 
 function! GethaskellIndent()
   let prevline = getline(v:lnum - 1)
@@ -60,13 +59,26 @@ function! GethaskellIndent()
     return s + 2
   endif
 
-  if line =~ '^\s*\<in\>'
+  if line =~ '^\s*\<let\>'
+    let s = match(prevline, '\<let\>')
+    if s != 0
+      return s
+    endif
+  endif
+
+  if line =~ '^\s\+\<in\>'
     let n = v:lnum
     let s = 0
 
     while s <= 0 && n > 0
       let n = n - 1
-      let s = match(getline(n),'\<let\>')
+      let l = getline(n)
+
+      if l =~ '^\S'
+        return 0
+      endif
+
+      let s = match(l,'\<let\>')
     endwhile
 
     return s + 1
